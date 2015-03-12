@@ -11,16 +11,17 @@ setwd("your file path here")
 
 ##Obtain top level file path
 fp <- getwd()
+fp <- gsub("/", "\\\\", fp, fixed = TRUE)
 
 ##Obtain file geo database name
 gdb <- dir(pattern = "\\.gdb$")
 
 ##Get list of input files
 input <- sort(list.files("./input", pattern = "\\.shp$"))#basename
-input_files <- paste0(fp, "/", "input", "/", sort(list.files("./input", pattern = "\\.shp$")))
+input_files <- paste0(fp, "\\\\", "input", "\\\\", sort(list.files("./input", pattern = "\\.shp$")))
 
 ##Get list of clip files
-clip_files <- paste0(fp, "/", "clip", "/", sort(list.files("./clip", pattern = "\\.shp$")))
+clip_files <- paste0(fp, "\\\\", "clip", "\\\\", sort(list.files("./clip", pattern = "\\.shp$")))
 
 
 ## Get common identifier for output name
@@ -31,7 +32,7 @@ split <- as.data.frame(matrix(unlist(strsplit(input, split = "\\.")), nrow=lgth,
 
 ## Create name for output name
 name_no_shp <- substr(split[,1], 1, 35)## hard coded to match input string format
-out_name <- paste0(fp, "/", gdb, "/", "UM", "_", name_no_shp)
+out_name <- paste0(fp, "\\\\", gdb, "\\\\", "UM", "_", name_no_shp)
 
 
 ## Get common identifier to search UM tiles
